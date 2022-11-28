@@ -1,0 +1,175 @@
+create database GFARMADB
+
+USE GFARMADB
+
+CREATE TABLE articulo (
+  id_articulo int NOT NULL IDENTITY,
+  descripcion varchar(30) NOT NULL,
+  precio_venta int NOT NULL,
+  precio_costo int NOT NULL,
+  stock int NOT NULL,
+  cod_tipo_articulo int NOT NULL,
+  cod_proveedor varchar(20) NOT NULL,
+  fecha_ingreso varchar(15) NOT NULL,
+  PRIMARY KEY (id_articulo)
+)   ;
+ 
+ CREATE INDEX ref_tipo_articulo_idx ON articulo (cod_tipo_articulo);
+ CREATE INDEX ref_prov_art_idx ON articulo (cod_proveedor);
+
+ SET IDENTITY_INSERT GFARMADB. [dbo].[articulo]  ON 
+ INSERT INTO articulo ( descripcion, precio_venta, precio_costo, stock, cod_tipo_articulo, cod_proveedor, fecha_ingreso) 
+ VALUES
+( 'PRUEBA', 10, 8, 20, 19, '00003-A', '2012-11-03')
+
+
+SELECT*FROM articulo
+
+CREATE TABLE ciudad (
+  Codigo_ciudad int NOT NULL IDENTITY,
+  Nombre_ciudad varchar(30) NOT NULL,
+  PRIMARY KEY (Codigo_ciudad)
+)   ;
+
+INSERT INTO ciudad ( Nombre_ciudad) VALUES
+('MANAGUA'),
+( 'CHINANDEGA'),
+( 'LEON'),
+( 'GRANADA'),
+( 'MATAGALPA'),
+( 'NUEVA SEGOVIA'),
+( 'CARAZO'),
+( 'ESTELI'),
+( 'CHONTALES'),
+( 'RIVAS'),
+( 'MATAGALPA'),
+( 'MADRIZ'),
+( 'JINOTEGA'),
+( 'ATLANTICO NORTE'),
+( 'ATLANTICO SUR'),
+( 'MASAYA')
+SELECT *FROM ciudad
+
+CREATE TABLE cliente (
+  Documento varchar(15) NOT NULL,
+  cod_tipo_documento int NOT NULL,
+  Nombres varchar(30) NOT NULL,
+  Apellidos varchar(30) NOT NULL,
+  Direccion varchar(20) DEFAULT NULL,
+  cod_ciudad int NOT NULL,
+  Telefono varchar(20) DEFAULT NULL,
+  PRIMARY KEY (Documento)
+) ;
+
+CREATE INDEX cod_tipodocumento_idx ON cliente (cod_tipo_documento);
+CREATE INDEX ref_ciudad_idx ON cliente (cod_ciudad);
+
+INSERT INTO cliente (Documento, cod_tipo_documento, Nombres, Apellidos, Direccion, cod_ciudad, Telefono) VALUES
+('000031', 1, 'Carlos', 'Gurdian', 'Carretera a Masaya', 1, '88245678'),
+('000032', 1, 'Joseangel', 'Lopez', 'Veracruz', 1, '88339413'),
+('0001', 1, 'Camilo', 'Lopez', 'Villa Fontana', 1, '82395783')
+
+CREATE TABLE detalle_factura (
+  cod_factura varchar(20) NOT NULL,
+  cod_articulo int NOT NULL,
+  cantidad int NOT NULL,
+  total decimal(10,0) NOT NULL,
+  PRIMARY KEY (cod_factura,cod_articulo)
+) ;
+
+CREATE INDEX ref_facturacion_idx ON detalle_factura (cod_factura);
+CREATE INDEX ref_ar_fact_idx ON detalle_factura (cod_articulo);
+
+INSERT INTO detalle_factura (cod_factura, cod_articulo, cantidad, total) VALUES
+('FACT-9910966',1, 1, '150000'),
+('FACT-9910966', 2, 2, '240000'),
+('FACT-9910966', 3, 1, '47500');
+
+CREATE TABLE devolucion (
+  cod_detallefactura varchar(20) NOT NULL,
+  cod_detallearticulo int NOT NULL,
+  Motivo varchar(15) NOT NULL,
+  Fecha_devolucion varchar(10) NOT NULL,
+  cantidad int NOT NULL,
+  PRIMARY KEY (cod_detallefactura,cod_detallearticulo)
+) ;
+
+CREATE INDEX ref_detallefactu_idx ON devolucion (cod_detallefactura);
+CREATE INDEX ref_deta_art_idx ON devolucion (cod_detallearticulo);
+
+INSERT INTO devolucion (cod_detallefactura, cod_detallearticulo, Motivo, Fecha_devolucion, cantidad) VALUES
+('FACT-9910966', 3, 'incompleto', '22/1/2022', 1);
+
+CREATE TABLE factura (
+  Nnm_factura varchar(20) NOT NULL,
+  cod_cliente varchar(15) NOT NULL,
+  Nombre_empleado varchar(30) NOT NULL,
+  Fecha_facturacion varchar(15) NOT NULL,
+  cod_formapago int NOT NULL,
+  total_factura decimal(10,0) DEFAULT NULL,
+  IVA decimal(10,0) DEFAULT NULL,
+  PRIMARY KEY (Nnm_factura)
+) ;
+
+CREATE INDEX ref_cli_idx ON factura (cod_cliente);
+CREATE INDEX ref_formapago_idx ON factura (cod_formapago);
+
+INSERT INTO factura (Nnm_factura, cod_cliente, Nombre_empleado, Fecha_facturacion, cod_formapago, total_factura, IVA) VALUES
+('FACT-9910966', '0001', 'jose', '22/1/2022', 1, '43', '7');
+
+CREATE TABLE forma_de_pago (
+  id_formapago int NOT NULL IDENTITY,
+  Descripcion_formapago varchar(20) NOT NULL,
+  PRIMARY KEY (id_formapago)
+)   ;
+
+INSERT INTO forma_de_pago ( Descripcion_formapago) VALUES
+( 'EFECTIVO'),
+( 'BONO'),
+( 'TARJETA DE CREDITO'),
+( 'CHEQUE');
+
+CREATE TABLE proveedor (
+  No_documento varchar(20) NOT NULL,
+  cod_tipo_documento int NOT NULL,
+  Nombre varchar(20) NOT NULL,
+  Apellido varchar(20) NOT NULL,
+  Nombre_comercial varchar(20) NOT NULL,
+  direccion varchar(20) DEFAULT NULL,
+  cod_ciudad int NOT NULL,
+  Telefono varchar(15) DEFAULT NULL,
+  PRIMARY KEY (No_documento)
+) ;
+
+CREATE INDEX ref_prov_ciudad_idx ON proveedor (cod_ciudad);
+CREATE INDEX proveedor_ibfk_1 ON proveedor (cod_tipo_documento);
+
+INSERT INTO proveedor (No_documento, cod_tipo_documento, Nombre, Apellido, Nombre_comercial, direccion, cod_ciudad, Telefono) VALUES
+('00001-1', 4, 'Juan', 'Garcia', 'MK', 'KM 8 ', 1, 88215478),
+('00002-2', 4, 'Mario', 'Lopez', 'Bayern', 'KM 12', 2, 22697851)
+
+CREATE TABLE tipo_articulo (
+  id_tipoarticulo int NOT NULL IDENTITY,
+  descripcion_articulo varchar(30) NOT NULL,
+  PRIMARY KEY (id_tipoarticulo)
+)   ;
+INSERT INTO tipo_articulo ( descripcion_articulo) VALUES
+( 'ANTIBIOTICOS'),
+( 'GRIPE')
+
+CREATE TABLE tipo_de_documento (
+  id_tipo_documento int NOT NULL IDENTITY,
+  Descripcion varchar(10) NOT NULL,
+  PRIMARY KEY (id_tipo_documento)
+)   ;
+
+INSERT INTO tipo_de_documento (Descripcion) VALUES
+('ID'),
+('PASAPORTE')
+SELECT *FROM tipo_de_documento
+
+ALTER TABLE articulo
+  ADD CONSTRAINT ref_prov_art FOREIGN KEY (cod_proveedor) REFERENCES proveedor (No_documento) ON DELETE CASCADE ON UPDATE CASCADE
+  ADD CONSTRAINT ref_tipo_articulo FOREIGN KEY (cod_tipo_articulo) REFERENCES tipo_articulo (id_tipoarticulo) ON DELETE CASCADE ON UPDATE CASCADE;
+
+
