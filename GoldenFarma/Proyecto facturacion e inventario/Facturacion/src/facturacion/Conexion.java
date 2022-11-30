@@ -17,7 +17,7 @@ public class Conexion {
 
     private static final String SERVIDOR = "localhost";
     private static final String PUERTO = "1433";
-    private static final String NOMBREBD = "GFARMADB";
+    private static final String NOMBREBD = "GOLDENFARMADB";
     private static final String USUARIO = "sa";
     private static final String PW = "123";
     private static final String DRIVER = "com.microsoft.sqlserver.jdbc.SQLServerDriver";

@@ -118,7 +118,6 @@ control_existencias ctrl = new control_existencias();
         jMenu2.add(jMenuItem6);
 
         jMenuItem8.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jMenuItem8.setText("Devoluciones");
         jMenuItem8.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -283,9 +282,7 @@ control_existencias ctrl = new control_existencias();
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
-    Interfaz_devoluciones dev = new Interfaz_devoluciones();
-    jDesktopPane1.add(dev);
-    dev.show();
+
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     /**
