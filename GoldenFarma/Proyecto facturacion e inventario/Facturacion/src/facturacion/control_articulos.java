@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author ANDRES
+ * @author cgurdian
  */
 public class control_articulos {
     

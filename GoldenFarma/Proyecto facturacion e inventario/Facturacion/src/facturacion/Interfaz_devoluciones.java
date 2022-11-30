@@ -10,7 +10,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author ANDRES
+ * @author josea
  */
 public class Interfaz_devoluciones extends javax.swing.JInternalFrame {
 

@@ -8,7 +8,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author ANDRES
+ * @author emiliano
  */
 public class Interfaz_buscarclientes extends javax.swing.JInternalFrame {
 

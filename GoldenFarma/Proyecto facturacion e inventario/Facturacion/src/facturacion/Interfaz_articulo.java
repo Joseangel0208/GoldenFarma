@@ -12,7 +12,7 @@ import sun.util.calendar.BaseCalendar;
 
 /**
  *
- * @author ANDRES
+ * @author emiliano
  */
 public class Interfaz_articulo extends javax.swing.JInternalFrame {
 control_existencias con = new control_existencias();

@@ -12,7 +12,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author ANDRES
+ * @author josea
  */
 public class Interfaz_factura extends javax.swing.JInternalFrame {
 

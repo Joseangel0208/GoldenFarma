@@ -6,7 +6,7 @@ package facturacion;
 
 /**
  *
- * @author ANDRES
+ * @author cgurdian
  */
 public class Persona {
     

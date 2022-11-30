@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author equipo farma
+ * @author cgurdian
  */
 public class Conexion {
 

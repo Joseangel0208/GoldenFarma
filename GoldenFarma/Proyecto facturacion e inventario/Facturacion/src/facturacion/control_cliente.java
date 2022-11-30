@@ -13,7 +13,7 @@ import javax.swing.table.DefaultTableModel;
     
 /**
  *
- * @author ANDRES
+ * @author josea
  */
 public class control_cliente extends Persona {
 private Sentencias_sql sql; 
