@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author ANDRES
+ * @author Cgurdian
  */
 public class Interfaz_principal extends javax.swing.JFrame {
 control_existencias ctrl = new control_existencias();
