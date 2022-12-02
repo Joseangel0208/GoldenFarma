@@ -25,13 +25,13 @@ control_existencias con = new control_existencias();
         bloquear_cajas();
         this.calendario.setEnabled(false);
         
-        Object[] tipo = con.combox("tipo_articulo","id_tipoarticulo");
+        Object[] tipo = con.combox("tipo_articulo","descripcion_articulo");
         combotipo.removeAllItems();
         for(int i=0;i<tipo.length;i++){
         combotipo.addItem(tipo[i]);
         
     }
-        Object[] prov = con.combox("proveedor","No_documento");
+        Object[] prov = con.combox("proveedor","Nombre_comercial");
         comboproveedor.removeAllItems();
         for(int i=0;i<prov.length;i++){
         comboproveedor.addItem(prov[i]);

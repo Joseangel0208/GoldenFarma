@@ -21,7 +21,7 @@ public class IVA {
     public  Double calcular_iva()
     { 
         double iva;               
-        iva = precio*16/100;
+        iva = precio*15/100;
         return iva;
         
     }

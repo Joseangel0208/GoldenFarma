@@ -20,13 +20,13 @@ control_existencias cc = new control_existencias();
         limpiar();
         bloquear_cajas();
         
-        Object[] tipo_doc = cc.combox("tipo_de_documento","id_tipo_documento");
+        Object[] tipo_doc = cc.combox("tipo_de_documento","Descripcion");
         combo_tipo.removeAllItems();
         for(int i=0;i<tipo_doc.length;i++){
         combo_tipo.addItem(tipo_doc[i]);
         }
         
-        Object[] ciudad = cc.combox("ciudad","codigo_ciudad");
+        Object[] ciudad = cc.combox("ciudad","Nombre_ciudad");
         ciudad_combo.removeAllItems();
         for(int i=0;i<ciudad.length;i++){
         ciudad_combo.addItem(ciudad[i]);
