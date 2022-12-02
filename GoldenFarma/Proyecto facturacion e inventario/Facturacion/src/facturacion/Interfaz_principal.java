@@ -57,7 +57,7 @@ control_existencias ctrl = new control_existencias();
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/complementos/Farmalogo.png"))); // NOI18N
         jLabel1.setText("jLabel1");
         jDesktopPane1.add(jLabel1);
-        jLabel1.setBounds(280, 100, 740, 370);
+        jLabel1.setBounds(570, 310, 740, 370);
 
         jMenuBar1.setBackground(new java.awt.Color(0, 153, 153));
 

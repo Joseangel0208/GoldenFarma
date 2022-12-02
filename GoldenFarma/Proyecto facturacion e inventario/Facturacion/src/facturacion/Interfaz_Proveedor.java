@@ -20,13 +20,13 @@ control_existencias cc = new control_existencias();
         limpiar();
         bloquear_cajas();
         
-        Object[] tipo_doc = cc.combox("tipo_de_documento","Descripcion");
+        Object[] tipo_doc = cc.combox("tipo_de_documento","id_tipo_documento");
         combo_tipo.removeAllItems();
         for(int i=0;i<tipo_doc.length;i++){
         combo_tipo.addItem(tipo_doc[i]);
         }
         
-        Object[] ciudad = cc.combox("ciudad","Nombre_ciudad");
+        Object[] ciudad = cc.combox("ciudad","Codigo_ciudad");
         ciudad_combo.removeAllItems();
         for(int i=0;i<ciudad.length;i++){
         ciudad_combo.addItem(ciudad[i]);
@@ -421,6 +421,11 @@ control_existencias cc = new control_existencias();
         combo_tipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         ciudad_combo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        ciudad_combo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ciudad_comboActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -508,7 +513,7 @@ control_existencias cc = new control_existencias();
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nomproveedorjTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ciudad_combo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel16)
                     .addComponent(jLabel20))
@@ -525,14 +530,14 @@ control_existencias cc = new control_existencias();
                 .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 195, Short.MAX_VALUE)
+                    .addGap(0, 199, Short.MAX_VALUE)
                     .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 195, Short.MAX_VALUE)))
+                    .addGap(0, 199, Short.MAX_VALUE)))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 195, Short.MAX_VALUE)
+                    .addGap(0, 199, Short.MAX_VALUE)
                     .addComponent(jInternalFrame2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 195, Short.MAX_VALUE)))
+                    .addGap(0, 199, Short.MAX_VALUE)))
         );
 
         pack();
@@ -665,6 +670,10 @@ public void limpiar()
     private void telefonoprovjTextField9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_telefonoprovjTextField9ActionPerformed
    telefonoprovjTextField9.transferFocus();
     }//GEN-LAST:event_telefonoprovjTextField9ActionPerformed
+
+    private void ciudad_comboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ciudad_comboActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ciudad_comboActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField apellproveedorjTextField9;
