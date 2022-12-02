@@ -31,6 +31,7 @@ control_existencias ctrl = new control_existencias();
     private void initComponents() {
 
         jDesktopPane1 = new javax.swing.JDesktopPane();
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -52,6 +53,11 @@ control_existencias ctrl = new control_existencias();
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jDesktopPane1.setBackground(java.awt.Color.darkGray);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/complementos/Farmalogo.png"))); // NOI18N
+        jLabel1.setText("jLabel1");
+        jDesktopPane1.add(jLabel1);
+        jLabel1.setBounds(280, 100, 740, 370);
 
         jMenuBar1.setBackground(new java.awt.Color(0, 153, 153));
 
@@ -323,6 +329,7 @@ control_existencias ctrl = new control_existencias();
     private javax.swing.JMenuItem Buscararticulos;
     private javax.swing.JMenuItem item_venta;
     private javax.swing.JDesktopPane jDesktopPane1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
