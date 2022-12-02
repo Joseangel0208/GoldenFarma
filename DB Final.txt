@@ -1,0 +1,195 @@
+create database GOLDENFARMADB
+
+USE GOLDENFARMADB
+
+CREATE TABLE articulo (
+  id_articulo int NOT NULL,
+  descripcion varchar(30) NOT NULL,
+  precio_venta int NOT NULL,
+  precio_costo int NOT NULL,
+  stock int NOT NULL,
+  cod_tipo_articulo int NOT NULL,
+  cod_proveedor varchar(20) NOT NULL,
+  fecha_ingreso varchar(15) NOT NULL,
+  PRIMARY KEY (id_articulo)
+)   ;
+ CREATE INDEX ref_tipo_articulo_idx ON articulo (cod_tipo_articulo);
+ CREATE INDEX ref_prov_art_idx ON articulo (cod_proveedor);
+
+ INSERT INTO articulo (id_articulo, descripcion, precio_venta, precio_costo, stock, cod_tipo_articulo, cod_proveedor, fecha_ingreso) 
+ VALUES
+(1, 'PARAETAMOL', 10, 8, 20, 1, '001', '2022-11-03'),
+(2, 'OMEPRAZOL', 10, 8, 20, 2, '001', '2022-11-03'),
+(3, 'ASPIRINA', 10, 8, 20, 3, '001', '2022-11-03'),
+(4, 'IBUPROFENO', 10, 8, 20, 1, '001', '2022-11-03'),
+(5, 'RAMIPRIL', 10, 8, 20, 4, '001', '2022-11-03')
+
+SELECT *FROM articulo
+
+CREATE TABLE ciudad (
+  Codigo_ciudad int NOT NULL IDENTITY,
+  Nombre_ciudad varchar(30) NOT NULL,
+  PRIMARY KEY (Codigo_ciudad)
+)   ;
+
+INSERT INTO ciudad ( Nombre_ciudad) VALUES
+('MANAGUA'),
+( 'CHINANDEGA'),
+( 'LEON'),
+( 'GRANADA'),
+( 'MATAGALPA'),
+( 'NUEVA SEGOVIA'),
+( 'CARAZO'),
+( 'ESTELI'),
+( 'CHONTALES'),
+( 'RIVAS'),
+( 'MATAGALPA'),
+( 'MADRIZ'),
+( 'JINOTEGA'),
+( 'ATLANTICO NORTE'),
+( 'ATLANTICO SUR'),
+( 'MASAYA')
+
+SELECT *FROM ciudad
+
+CREATE TABLE cliente (
+  Documento varchar(15) NOT NULL,
+  cod_tipo_documento int NOT NULL,
+  Nombres varchar(30) NOT NULL,
+  Apellidos varchar(30) NOT NULL,
+  Direccion varchar(20) DEFAULT NULL,
+  cod_ciudad int NOT NULL,
+  Telefono varchar(20) DEFAULT NULL,
+  PRIMARY KEY (Documento)
+) ;
+
+CREATE INDEX cod_tipodocumento_idx ON cliente (cod_tipo_documento);
+CREATE INDEX ref_ciudad_idx ON cliente (cod_ciudad);
+
+INSERT INTO cliente (Documento, cod_tipo_documento, Nombres, Apellidos, Direccion, cod_ciudad, Telefono) VALUES
+('001', 1, 'Carlos', 'Gurdian', 'Carretera a Masaya', 1, '88245678'),
+('002', 1, 'Joseangel', 'Lopez', 'Veracruz', 1, '88339413'),
+('003', 1, 'Camilo', 'Lopez', 'Villa Fontana', 1, '82395783')
+
+CREATE TABLE detalle_factura (
+  cod_factura varchar(20) NOT NULL,
+  cod_articulo int NOT NULL,
+  cantidad int NOT NULL,
+  total decimal(10,0) NOT NULL,
+  PRIMARY KEY (cod_factura,cod_articulo)
+) ;
+
+CREATE INDEX ref_facturacion_idx ON detalle_factura (cod_factura);
+CREATE INDEX ref_ar_fact_idx ON detalle_factura (cod_articulo);
+
+INSERT INTO detalle_factura (cod_factura, cod_articulo, cantidad, total) VALUES
+('FACT-001',1, 1, '50'),
+('FACT-002', 2, 2, '75'),
+('FACT-003', 3, 1, '45');
+
+
+
+CREATE TABLE factura (
+  Nnm_factura varchar(20) NOT NULL,
+  cod_cliente varchar(15) NOT NULL,
+  Nombre_empleado varchar(30) NOT NULL,
+  Fecha_facturacion varchar(15) NOT NULL,
+  cod_formapago int NOT NULL,
+  total_factura decimal(10,0) DEFAULT NULL,
+  IVA decimal(10,0) DEFAULT NULL,
+  PRIMARY KEY (Nnm_factura)
+) ;
+
+CREATE INDEX ref_cli_idx ON factura (cod_cliente);
+CREATE INDEX ref_formapago_idx ON factura (cod_formapago);
+
+INSERT INTO factura (Nnm_factura, cod_cliente, Nombre_empleado, Fecha_facturacion, cod_formapago, total_factura, IVA) VALUES
+--('FACT-001', '001', 'Jose', '22/1/2022', 1, '50', '15'),
+('FACT-002', '001', 'Jose', '22/1/2022', 1, '75', '15'),
+('FACT-003', '001', 'Jose', '22/1/2022', 1, '45', '15');
+SELECT *FROM factura
+CREATE TABLE forma_de_pago (
+  id_formapago int NOT NULL IDENTITY,
+  Descripcion_formapago varchar(20) NOT NULL,
+  PRIMARY KEY (id_formapago)
+)   ;
+
+INSERT INTO forma_de_pago ( Descripcion_formapago) VALUES
+( 'EFECTIVO'),
+( 'TARJETA DE CREDITO'),
+( 'CHEQUE');
+
+CREATE TABLE proveedor (
+  No_documento varchar(20) NOT NULL,
+  cod_tipo_documento int NOT NULL,
+  Nombre varchar(20) NOT NULL,
+  Apellido varchar(20) NOT NULL,
+  Nombre_comercial varchar(20) NOT NULL,
+  direccion varchar(20) DEFAULT NULL,
+  cod_ciudad int NOT NULL,
+  Telefono varchar(15) DEFAULT NULL,
+  PRIMARY KEY (No_documento)
+) ;
+
+CREATE INDEX ref_prov_ciudad_idx ON proveedor (cod_ciudad);
+CREATE INDEX proveedor_ibfk_1 ON proveedor (cod_tipo_documento);
+
+INSERT INTO proveedor (No_documento, cod_tipo_documento, Nombre, Apellido, Nombre_comercial, direccion, cod_ciudad, Telefono) VALUES
+('001', 4, 'Juan', 'Garcia', 'MK', 'KM 8 ', 1, 88215478),
+('002', 4, 'Mario', 'Lopez', 'Bayern', 'KM 12', 2, 22697851)
+
+CREATE TABLE tipo_articulo (
+  id_tipoarticulo int NOT NULL IDENTITY,
+  descripcion_articulo varchar(30) NOT NULL,
+  PRIMARY KEY (id_tipoarticulo)
+)   ;
+INSERT INTO tipo_articulo ( descripcion_articulo) VALUES
+( 'ANTIBIOTICOS'),
+( 'ESTOMAGO'),
+('CARDIACOS'),
+( 'PRESION');
+
+
+CREATE TABLE tipo_de_documento (
+  id_tipo_documento int NOT NULL IDENTITY,
+  Descripcion varchar(10) NOT NULL,
+  PRIMARY KEY (id_tipo_documento)
+)   ;
+
+INSERT INTO tipo_de_documento (Descripcion) VALUES
+('CEDULA'),
+('PASAPORTE')
+SELECT *FROM tipo_de_documento
+
+ALTER TABLE articulo
+  ADD CONSTRAINT ref_prov_art FOREIGN KEY (cod_proveedor) REFERENCES proveedor (No_documento) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE articulo 
+  ADD CONSTRAINT ref_tipo_articulo FOREIGN KEY (cod_tipo_articulo) REFERENCES tipo_articulo (id_tipoarticulo) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE cliente
+  ADD CONSTRAINT ref_ciudad FOREIGN KEY (cod_ciudad) REFERENCES ciudad (Codigo_ciudad) ON DELETE CASCADE ON UPDATE CASCADE
+ALTER TABLE cliente
+  ADD CONSTRAINT ref_tipo_doc FOREIGN KEY (cod_tipo_documento) REFERENCES tipo_de_documento (id_tipo_documento) ON DELETE CASCADE ON UPDATE CASCADE;
+
+SELECT *FROM proveedor
+SELECT *FROM articulo
+
+ALTER TABLE detalle_factura
+  ADD CONSTRAINT ref_ar_fact FOREIGN KEY (cod_articulo) REFERENCES articulo (id_articulo) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE detalle_factura
+  ADD CONSTRAINT ref_facturacion FOREIGN KEY (cod_factura) REFERENCES factura (Nnm_factura) ON DELETE CASCADE ON UPDATE CASCADE;
+
+SELECT *FROM detalle_factura
+
+SELECT *FROM tipo_articulo
+
+
+  ALTER TABLE factura
+  ADD CONSTRAINT ref_cli FOREIGN KEY (cod_cliente) REFERENCES cliente (Documento) ON DELETE CASCADE ON UPDATE CASCADE;
+  ALTER TABLE factura
+  ADD CONSTRAINT ref_formapago FOREIGN KEY (cod_formapago) REFERENCES forma_de_pago (id_formapago) ON DELETE CASCADE ON UPDATE CASCADE;
+
+  ALTER TABLE proveedor
+  --EEROR -- ADD CONSTRAINT proveedor_ibfk_1 FOREIGN KEY (cod_tipo_documento) REFERENCES tipo_de_documento (id_tipo_documento) ON DELETE CASCADE ON UPDATE CASCADE
+  ADD CONSTRAINT ref_prov_ciudad FOREIGN KEY (cod_ciudad) REFERENCES ciudad (Codigo_ciudad) ON DELETE NO ACTION ON UPDATE NO ACTION;
